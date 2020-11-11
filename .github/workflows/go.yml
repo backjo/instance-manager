@@ -44,4 +44,4 @@ jobs:
     - name: Docker Build
       id: dockerbuild
       run: |
-        make docker-build  
+        make docker-multiarch-build  
