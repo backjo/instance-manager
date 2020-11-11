@@ -41,6 +41,12 @@ jobs:
       with:
         install: true
         version: latest
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+      with:
+        image: tonistiigi/binfmt:latest
+        platforms: all
     - name: Docker Build
       id: dockerbuild
       run: |
