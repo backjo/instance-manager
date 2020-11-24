@@ -67,7 +67,27 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
  
-    - name: Push
-      #if: github.ref == 'refs/heads/master'
-      run: make docker-multiarch-push 
+    -
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v1 
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
+
+    -
+      name: Docker meta
+      id: docker_meta
+      uses: crazy-max/ghaction-docker-meta@v1
+      with:
+        images: jbacklegalzoom/instancemgr,ghcr.io/backjo/instance-manager
+    -
+      name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+        push: true
+        tags: ${{ steps.docker_meta.outputs.tags }}
        
