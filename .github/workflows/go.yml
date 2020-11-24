@@ -58,7 +58,7 @@ jobs:
     - name: Docker Build
       id: dockerbuild
       run: |
-        make docker-build  
+        IMG=jbacklegalzoom/instancemgr:${GITHUB_REF##*/} make docker-build  
   
     - name: Login to DockerHub
       uses: docker/login-action@v1
