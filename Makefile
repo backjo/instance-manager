@@ -97,6 +97,13 @@ vet:
 generate: controller-gen
 	$(CONTROLLER_GEN) object:headerFile=./hack/boilerplate.go.txt paths=./api/...
 
+# Buildmutliarch image
+.PHONY: docker-multiarch-push
+docker-multiarch-push:
+	docker buildx build --platform linux/amd64,linux/arm64 --push -t ${IMG} .
+	@echo "updating kustomize image patch file for manager resource"
+	sed -i'' -e 's@image: .*@image: '"${IMG}"'@' ./config/default/manager_image_patch.yaml
+
 # Build the docker image
 .PHONY: docker-build
 docker-build:
