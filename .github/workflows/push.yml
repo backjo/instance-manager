@@ -56,5 +56,5 @@ jobs:
         file: ./Dockerfile
         platforms: linux/amd64,linux/arm/v7,linux/arm64
         push: true
-        tags: ghcr.io/backjo/instance-manager:hotfix
+        tags: ghcr.io/backjo/instance-manager
 
