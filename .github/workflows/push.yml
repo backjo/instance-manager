@@ -9,6 +9,7 @@ on:
 jobs:
   push:
     permissions:
+      contents: read
       packages: write
     name: push
     if: github.repository_owner == 'backjo'
