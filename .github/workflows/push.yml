@@ -10,12 +10,11 @@ jobs:
   push:
     permissions:
       contents: read
-      packages: write
+      packages: admin
     name: push
     if: github.repository_owner == 'backjo'
     runs-on: ubuntu-20.04
     steps:
-
     - name: Check out code into the Go module directory
       uses: actions/checkout@v4
 
